@@ -8,7 +8,7 @@ RUN apk add --no-cache git
 WORKDIR /app
 
 # Copy the backend source code
-COPY rapatln_backend/ .
+COPY rapatk/ .
 
 # Download dependencies
 RUN go mod download
