@@ -1,29 +1,7 @@
-<<<<<<< HEAD
 .git
 .gitignore
 Dockerfile
 docker-compose.yml
-.env
-*.exe
-*.test
-vendor/
-node_modules/
-.dockerignore
-=======
-# Docker ignore file
 node_modules
-.git
-.gitignore
-*.exe
-*.test
-*.bin
-vendor
+dist
 .env
-.agent
-.gemini
-tmp
-docker-compose.yml
-Dockerfile
-.dockerignore
-README.md
->>>>>>> a9372bda80e01593983925818dd7d27bac3be68f

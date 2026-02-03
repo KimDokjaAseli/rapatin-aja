@@ -18,6 +18,11 @@ func ConnectDatabase() {
 	// Koneksi ke MongoDB
 	mongoURI := os.Getenv("MONGO_URL")
 	if mongoURI == "" {
+		mongoURI = os.Getenv("MONGODB_URL")
+	}
+
+	if mongoURI == "" {
+		// Use the Railway external URL provided by user as final fallback
 		mongoURI = "mongodb://mongo:smVhjvhpEWPYtnCVKidYzgjIqMUBdcKm@gondola.proxy.rlwy.net:37059"
 	}
 
