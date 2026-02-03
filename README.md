@@ -1,49 +1,64 @@
-# Rapatin Aja Backend
+# 📘 RapatIn – Dokumentasi Widget & Struktur Aplikasi
 
-Backend service for Rapatin Aja application built with Go and MongoDB.
+README ini menjelaskan struktur komponen utama dalam aplikasi **RapatIn** untuk mempermudah pengembangan, perawatan, dan kolaborasi.
 
-## Getting Started with Docker
+---
 
-You can run the entire stack (Go backend and MongoDB) using Docker Compose.
+## 1. Tema Global (AppTheme)
 
-### Prerequisites
+**Lokasi:** `lib/core/app_theme.dart`
 
-- Docker
-- Docker Compose
+File ini berfungsi sebagai pusat pengaturan tampilan aplikasi.
 
-### Running the Application
+### Fungsi Utama
+- Menyimpan warna utama, font, dan gaya tombol.
+- Mengurangi duplikasi style pada setiap halaman.
+- Perubahan warna aplikasi cukup dilakukan di file ini.
 
-1. Clone the repository
-2. Run the following command:
+**Warna Utama:** Maroon (`0xFF800000`)
 
-```bash
-docker-compose up --build
-```
+---
 
-The backend will be available at `http://localhost:8080`.
+## 2. Widget Reusable
 
-## Configuration
+Widget di bawah ini digunakan berulang di banyak halaman.
 
-The application uses the following environment variables:
+### A. MeetingCard
+**Lokasi:** `lib/widgets/meeting_card.dart`
 
-- `PORT`: The port on which the server will run (default: 8080)
-- `MONGO_URL`: MongoDB connection string
+**Fungsi:**
+- Menampilkan ringkasan rapat dalam bentuk card.
+- Memuat: Status rapat, judul, lokasi, dan tanggal.
+- Digunakan pada halaman Home untuk daftar rapat.
 
-In the Docker Compose setup, these are pre-configured to use the local MongoDB container.
+---
 
-## API Endpoints
+### B. MeetingDetailSection
+**Lokasi:** `lib/widgets/meeting_detail_section.dart`
 
-### Auth
-- `POST /api/register`: Register a new user
-- `POST /api/login`: Login user
+**Fungsi:**
+- Menampilkan bagian-bagian isi notulensi seperti:
+  - Pembahasan
+  - Keputusan
+  - Tindak Lanjut
+- Memiliki ikon dan warna tema yang dapat disesuaikan.
 
-### Meetings
-- `GET /api/meetings`: Get all meetings
-- `GET /api/meetings/:id`: Get a meeting by ID
-- `POST /api/meetings`: Create a new meeting
-- `PATCH /api/meetings/:id`: Update a meeting
-- `DELETE /api/meetings/:id`: Delete a meeting
+---
 
-### User
-- `GET /api/user/:id`: Get user profile
-- `PUT /api/user/:id`: Update user profile
+## 3. Form dan Validasi
+
+### A. Form Login
+**Lokasi:** `lib/pages/login_page.dart`
+
+**Elemen:**
+- `TextField` Username
+- `TextField` Password
+
+**Validasi:**
+```dart
+if (uname.isEmpty || pass.isEmpty) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    const SnackBar(content: Text('Username dan Password harus diisi'))
+  );
+  return;
+}
