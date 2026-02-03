@@ -1,29 +1,5 @@
-<<<<<<< HEAD
 version: '3.8'
 
-services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    environment:
-      - PORT=8080
-      - MONGO_URL=mongodb://mongo:27017/rapatin_aja
-    depends_on:
-      - mongo
-
-  mongo:
-    image: mongo:latest
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
-
-volumes:
-  mongo_data:
-=======
 services:
   app:
     build:
@@ -62,4 +38,3 @@ networks:
 
 volumes:
   mongodb_data:
->>>>>>> a9372bda80e01593983925818dd7d27bac3be68f
