@@ -15,7 +15,7 @@ var Client *mongo.Client
 
 func ConnectDatabase() {
 	// Koneksi ke MongoDB lokal
-	clientOptions := options.Client().ApplyURI("mongodb://mongo:QdFFkEFlkNlDJTxfwYtqXODoKrCJumvw@maglev.proxy.rlwy.net:28565")
+	clientOptions := options.Client().ApplyURI("mongodb://mongo:smVhjvhpEWPYtnCVKidYzgjIqMUBdcKm@gondola.proxy.rlwy.net:37059")
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
