@@ -23,7 +23,7 @@ func ConnectDatabase() {
 
 	if mongoURI == "" {
 		// Use the Railway external URL provided by user as final fallback
-		mongoURI = "mongodb://mongo:smVhjvhpEWPYtnCVKidYzgjIqMUBdcKm@gondola.proxy.rlwy.net:37059"
+		mongoURI = "mongodb://mongo:iNnSkSTJGvmnHGdpDRViuGFWOaBDpmOp@mongodb.railway.internal:27017"
 	}
 
 	clientOptions := options.Client().ApplyURI(mongoURI)
@@ -42,7 +42,7 @@ func ConnectDatabase() {
 	}
 
 	fmt.Println("Connected to MongoDB!")
-	DB = client.Database("rapatuy_penjaruy")
+	DB = client.Database("test")
 	Client = client
 }
 

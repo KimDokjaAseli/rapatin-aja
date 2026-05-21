@@ -16,7 +16,7 @@ import (
 // Register
 func Register(c *gin.Context) {
 	var input struct {
-		Username string `json:"username" binding:"required"`
+		Email    string `json:"email" binding:"required"`
 		Password string `json:"password" binding:"required"`
 		Name     string `json:"name" binding:"required"`
 	}
@@ -32,9 +32,9 @@ func Register(c *gin.Context) {
 
 	// Check if user exists
 	var existingUser models.User
-	err := collection.FindOne(ctx, bson.M{"username": input.Username}).Decode(&existingUser)
+	err := collection.FindOne(ctx, bson.M{"email": input.Email}).Decode(&existingUser)
 	if err == nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Username already exists"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Email already exists"})
 		return
 	}
 
@@ -42,7 +42,7 @@ func Register(c *gin.Context) {
 
 	newUser := models.User{
 		ID:       primitive.NewObjectID(),
-		Username: input.Username,
+		Email:    input.Email,
 		Password: string(hashedPassword),
 		Name:     input.Name,
 		Position: "Member",
@@ -61,7 +61,7 @@ func Register(c *gin.Context) {
 // Login
 func Login(c *gin.Context) {
 	var input struct {
-		Username string `json:"username" binding:"required"`
+		Email    string `json:"email" binding:"required"`
 		Password string `json:"password" binding:"required"`
 	}
 
@@ -75,9 +75,9 @@ func Login(c *gin.Context) {
 	defer cancel()
 
 	var user models.User
-	err := collection.FindOne(ctx, bson.M{"username": input.Username}).Decode(&user)
+	err := collection.FindOne(ctx, bson.M{"email": input.Email}).Decode(&user)
 	if err != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid username or password"})
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid email or password"})
 		return
 	}
 
@@ -136,7 +136,7 @@ func UpdateUser(c *gin.Context) {
 			"position":         input.Position,
 			"bio":              input.Bio,
 			"profileImagePath": input.ProfileImagePath,
-			"username":         input.Username,
+			"email":            input.Email,
 		},
 	}
 

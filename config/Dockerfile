@@ -21,6 +21,7 @@ RUN apk add --no-cache ca-certificates
 RUN adduser -D appuser
 WORKDIR /app
 COPY --from=builder /app/main .
+COPY --from=builder /app/fe ./fe
 RUN chmod +x main
 USER appuser
 

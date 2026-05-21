@@ -20,7 +20,16 @@ func GetMeetings(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	cursor, err := collection.Find(ctx, bson.M{})
+	filter := bson.M{}
+	userIDStr := c.Query("userId")
+	if userIDStr != "" {
+		userID, err := primitive.ObjectIDFromHex(userIDStr)
+		if err == nil {
+			filter["userId"] = userID
+		}
+	}
+
+	cursor, err := collection.Find(ctx, filter)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -108,20 +117,14 @@ func UpdateMeeting(c *gin.Context) {
 	if input.Date != "" {
 		updateData["date"] = input.Date
 	}
+	if input.Time != "" {
+		updateData["time"] = input.Time
+	}
 	if input.Location != "" {
 		updateData["location"] = input.Location
 	}
-	if input.Discussion != "" {
-		updateData["discussion"] = input.Discussion
-	}
-	if input.Decision != "" {
-		updateData["decision"] = input.Decision
-	}
-	if input.FollowUp != "" {
-		updateData["followUp"] = input.FollowUp
-	}
-	if input.Status != "" {
-		updateData["status"] = input.Status
+	if input.Description != "" {
+		updateData["description"] = input.Description
 	}
 
 	update := bson.M{"$set": updateData}

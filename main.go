@@ -37,6 +37,11 @@ func main() {
 		api.PUT("/user/:id", controllers.UpdateUser)
 	}
 
+	// Serve Frontend Static Files
+	r.StaticFile("/", "./fe/index.html")
+	r.StaticFile("/app.js", "./fe/app.js")
+	r.StaticFile("/style.css", "./fe/style.css")
+
 	// Run the server
 	port := os.Getenv("PORT")
 	if port == "" {
