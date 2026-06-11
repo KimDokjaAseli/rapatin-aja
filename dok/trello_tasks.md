@@ -1,21 +1,21 @@
 # 📋 Panduan Trello Board - Proyek RapatIn
 
-Dokumen ini berisi daftar tugas, deskripsi, dan checklist yang siap dimasukkan ke dalam Trello Board untuk tim pengembang **RapatIn**. Proyek ini menggunakan arsitektur modular yang memisahkan **Database (MongoDB)**, **Backend (Golang Gin)**, dan **Frontend (Web Statis / Flutter App)**.
+Dokumen ini berisi daftar tugas, deskripsi, dan checklist yang siap dimasukkan ke Trello Board tim **RapatIn**. Proyek ini dibagi menjadi tiga bagian: **Database (MongoDB)**, **Backend (Golang Gin)**, dan **Frontend (Web Statis / Flutter App)**.
 
 ---
 
-## 💡 Cara Memasukkan ke Trello secara Cepat
-1. **Buat List (Kolom)** di Trello Board Anda:
+## 💡 Cara Cepat Memasukkan Tugas ke Trello
+1. **Buat Kolom (List)** di Trello Board Anda:
    * `Database Administrator (DBA)`
    * `Backend Developer`
    * `Frontend Developer`
-2. **Impor Card (Kartu) secara Massal**:
-   * Salin daftar judul kartu dari bagian **Daftar Ringkasan Kartu** di bawah ini.
-   * Klik **"Add a card"** pada list yang sesuai di Trello.
-   * Tempel (paste) daftar tersebut, lalu tekan **Enter**.
-   * Trello akan bertanya apakah Anda ingin memisahkan setiap baris menjadi kartu baru. Pilih **"Create Cards"**.
+2. **Impor Kartu (Card) secara Massal**:
+   * Salin daftar judul kartu dari bagian **Daftar Ringkasan Kartu** di bawah.
+   * Klik **"Add a card"** pada kolom yang sesuai di Trello.
+   * Tempel (paste) daftar judul tersebut, lalu tekan **Enter**.
+   * Pilih **"Create Cards"** ketika Trello bertanya untuk memisahkan setiap baris menjadi kartu baru.
 3. **Isi Deskripsi & Checklist**:
-   * Buka kartu yang telah dibuat, lalu salin **Deskripsi** dan **Checklist** dari bagian detail di bawah ini ke kartu Trello Anda.
+   * Buka kartu yang sudah dibuat, lalu salin **Deskripsi** dan **Checklist** dari detail di bawah ke kartu Trello Anda.
 
 ---
 
@@ -23,31 +23,31 @@ Dokumen ini berisi daftar tugas, deskripsi, dan checklist yang siap dimasukkan k
 
 ### 🗄️ List: Database Administrator (DBA)
 ```text
-DBA-01: Install dan Konfigurasi Server MongoDB Lokal
-DBA-02: Pembuatan Database rapatuy_penjaruy dan Koleksi
-DBA-03: Penerapan Indeks Database untuk Optimasi Kueri
-DBA-04: Seeding Data Uji (User & Meetings) untuk Development
-DBA-05: Konfigurasi Kredensial Database & Variabel Lingkungan
+DBA-01: Install dan Jalankan MongoDB Lokal
+DBA-02: Buat Database rapatuy_penjaruy dan Tabel/Koleksi
+DBA-03: Pasang Indeks Database agar Pencarian Lebih Cepat
+DBA-04: Isi Data Contoh (User & Rapat) untuk Uji Coba
+DBA-05: Atur Keamanan Database & File .env
 ```
 
 ### ⚙️ List: Backend Developer
 ```text
-BE-01: Inisialisasi Project Go & Konfigurasi Koneksi Database
-BE-02: Implementasi API Autentikasi Pengguna (Register & Login)
-BE-03: Implementasi API CRUD Notulensi Rapat
-BE-04: Implementasi API Manajemen Profil Pengguna
-BE-05: Konfigurasi CORS & Penyajian Static Files Frontend
-BE-06: Pengujian API Manual & Integrasi Endpoint
+BE-01: Setup Project Go & Hubungkan ke Database
+BE-02: Buat API Autentikasi (Register & Login)
+BE-03: Buat API Mengelola Rapat (CRUD)
+BE-04: Buat API Profil Pengguna
+BE-05: Atur CORS & Sajikan File Frontend dari Backend
+BE-06: Tes Semua API secara Manual
 ```
 
 ### 🎨 List: Frontend Developer
 ```text
-FE-01: Implementasi Tema Utama, Styling, dan Responsivitas UI
-FE-02: Pembuatan Halaman Autentikasi & Manajemen Sesi Lokal (Session)
-FE-03: Pembuatan Dashboard & Tampilan Daftar Rapat dengan Fitur Pencarian
-FE-04: Pembuatan Form Modal Tambah, Edit, dan Hapus Rapat
-FE-05: Integrasi Halaman Profil Pengguna & Avatar Dinamis (UI-Avatars API)
-FE-06: Integrasi API Backend ke UI & Penanganan Status Error (Toast)
+FE-01: Desain Tampilan Utama (Tema Maroon & Responsif)
+FE-02: Buat Halaman Login/Register & Simpan Sesi Login
+FE-03: Buat Dashboard & Daftar Rapat dengan Kolom Pencarian
+FE-04: Buat Form Modal (Tambah, Edit, Hapus Rapat)
+FE-05: Buat Halaman Profil & Foto Profil Otomatis (UI-Avatars)
+FE-06: Hubungkan UI Frontend dengan API Backend & Atur Notifikasi (Toast)
 ```
 
 ---
@@ -56,192 +56,191 @@ FE-06: Integrasi API Backend ke UI & Penanganan Status Error (Toast)
 
 ### 🗄️ DATABASE ADMINISTRATOR (DBA)
 
-#### **DBA-01: Install dan Konfigurasi Server MongoDB Lokal**
+#### **DBA-01: Install dan Jalankan MongoDB Lokal**
 * **Label**: `Database` `Setup` `High Priority`
 * **Deskripsi**:
-  Menyiapkan database server lokal MongoDB agar dapat diakses oleh aplikasi backend selama masa pengembangan (development).
+  Menginstal dan menjalankan database MongoDB di komputer/laptop lokal agar bisa dipakai oleh backend selama masa pembuatan aplikasi.
 * **Checklist**:
-  - [ ] Unduh dan install MongoDB Community Server
-  - [ ] Install MongoDB Compass (GUI Client) untuk visualisasi data
-  - [ ] Jalankan layanan MongoDB dan pastikan berjalan di port default `27017`
-  - [ ] Uji koneksi menggunakan string koneksi: `mongodb://localhost:27017/`
+  - [ ] Download dan instal MongoDB Community Server
+  - [ ] Instal MongoDB Compass (aplikasi visual untuk melihat isi database)
+  - [ ] Pastikan MongoDB berjalan di port bawaan `27017`
+  - [ ] Tes koneksi ke database dengan alamat `mongodb://localhost:27017/`
 
-#### **DBA-02: Pembuatan Database rapatuy_penjaruy dan Koleksi**
+#### **DBA-02: Buat Database rapatuy_penjaruy dan Tabel/Koleksi**
 * **Label**: `Database` `Schema` `High Priority`
 * **Deskripsi**:
-  Membuat database baru dengan nama `rapatuy_penjaruy` serta mendefinisikan koleksi-koleksi utama yang diperlukan oleh model data aplikasi.
+  Membuat database baru bernama `rapatuy_penjaruy` beserta tabel-tabel (koleksi) utama yang dibutuhkan aplikasi.
 * **Checklist**:
-  - [ ] Buat database bernama `rapatuy_penjaruy` di MongoDB
-  - [ ] Buat koleksi `users` untuk menyimpan profil pengguna dan kata sandi yang telah di-hash
-  - [ ] Buat koleksi `meetings` untuk menyimpan notulensi rapat beserta ID pembuatnya (`userId`)
-  - [ ] Verifikasi bahwa koleksi telah berhasil dibuat dan terlihat di MongoDB Compass
+  - [ ] Buat database baru bernama `rapatuy_penjaruy`
+  - [ ] Buat koleksi `users` (untuk menyimpan data akun dan password)
+  - [ ] Buat koleksi `meetings` (untuk menyimpan data rapat dan ID pembuatnya)
+  - [ ] Pastikan kedua koleksi sudah muncul di MongoDB Compass
 
-#### **DBA-03: Penerapan Indeks Database untuk Optimasi Kueri**
+#### **DBA-03: Pasang Indeks Database agar Pencarian Lebih Cepat**
 * **Label**: `Database` `Performance` `Medium Priority`
 * **Deskripsi**:
-  Membuat indeks pada bidang (field) penting untuk menjaga performa kueri pencarian data dan memastikan keunikan data autentikasi.
+  Membuat indeks pada kolom penting agar pencarian data lebih cepat dan mencegah email kembar di database.
 * **Checklist**:
-  - [ ] Terapkan indeks unik (`unique index`) pada field `email` di koleksi `users`
-  - [ ] Terapkan indeks pada field `userId` di koleksi `meetings` untuk mempercepat pemuatan rapat per user
-  - [ ] Terapkan indeks pada field `title` di koleksi `meetings` untuk pencarian berbasis teks
+  - [ ] Buat indeks unik untuk kolom `email` di tabel `users` (email tidak boleh sama)
+  - [ ] Buat indeks pada kolom `userId` di tabel `meetings` agar loading rapat per user lebih cepat
+  - [ ] Buat indeks pencarian teks pada kolom `title` di tabel `meetings` untuk fitur pencarian
 
-#### **DBA-04: Seeding Data Uji (User & Meetings) untuk Development**
+#### **DBA-04: Isi Data Contoh (User & Rapat) untuk Uji Coba**
 * **Label**: `Database` `Testing` `Medium Priority`
 * **Deskripsi**:
-  Memasukkan data awal (dummy data) ke dalam database untuk mempermudah tim backend dan frontend melakukan pengujian fitur login dan tampilan dashboard.
+  Mengisi database dengan data contoh (dummy data) agar backend dan frontend bisa langsung menguji fitur login dan dashboard.
 * **Checklist**:
-  - [ ] Buat data user uji dengan email `budi@email.com` dan password yang di-hash dengan bcrypt (`rahasia123`)
-  - [ ] Buat minimal 2 data rapat contoh yang dihubungkan dengan ID pengguna Budi
-  - [ ] Pastikan relasi model referensi ID (`userId` pada dokumen rapat) valid dan sesuai
+  - [ ] Buat data user contoh: email `budi@email.com` dan password `rahasia123` (di-hash menggunakan bcrypt)
+  - [ ] Buat minimal 2 data rapat contoh yang terhubung ke user Budi
+  - [ ] Pastikan ID user (`userId`) pada data rapat sudah sesuai dengan ID user Budi
 
-#### **DBA-05: Konfigurasi Kredensial Database & Variabel Lingkungan**
+#### **DBA-05: Atur Keamanan Database & File .env**
 * **Label**: `Database` `Security` `High Priority`
 * **Deskripsi**:
-  Menerapkan pengaturan keamanan database untuk staging/produksi dengan membuat user database baru dan merancang file konfigurasi variabel lingkungan (.env).
+  Mengatur keamanan akses database dan menyiapkan file konfigurasi variabel lingkungan (`.env`).
 * **Checklist**:
-  - [ ] Buat user database khusus dengan hak akses terbatas (`readWrite`) pada database `rapatuy_penjaruy`
-  - [ ] Siapkan konfigurasi variabel lingkungan dengan variabel `MONGO_URL` atau `MONGODB_URL`
-  - [ ] Dokumentasikan format koneksi database pada repositori
+  - [ ] Buat akun admin database khusus dengan hak akses `readWrite` pada database `rapatuy_penjaruy`
+  - [ ] Siapkan template file `.env` yang berisi variabel `MONGO_URL` atau `MONGODB_URL`
+  - [ ] Tulis dokumentasi singkat tentang cara koneksi database di file README proyek
 
 ---
 
 ### ⚙️ BACKEND DEVELOPER
 
-#### **BE-01: Inisialisasi Project Go & Konfigurasi Koneksi Database**
+#### **BE-01: Setup Project Go & Hubungkan ke Database**
 * **Label**: `Backend` `Setup` `High Priority`
 * **Deskripsi**:
-  Menginisialisasi modul Go backend, menginstal library driver MongoDB dan Gin Web Framework, serta membangun file konfigurasi database di `config/db.go`.
+  Membuat proyek Go baru, menginstal library/package yang dibutuhkan, dan membuat file konfigurasi database di `config/db.go`.
 * **Checklist**:
-  - [ ] Jalankan inisialisasi modul Go (`go mod init rapatln_backend`)
-  - [ ] Instal dependensi yang diperlukan (`gin`, `mongo-driver`, `cors`, `crypto/bcrypt`)
-  - [ ] Buat file `config/db.go` yang membaca variabel lingkungan `MONGO_URL` / `MONGODB_URL` untuk koneksi database
-  - [ ] Buat fungsi ping database di startup untuk memastikan status koneksi sukses
+  - [ ] Jalankan perintah `go mod init` (misal: `go mod init rapatin_backend`)
+  - [ ] Instal package yang dibutuhkan: `gin`, `mongo-driver`, `cors`, dan `bcrypt`
+  - [ ] Buat file `config/db.go` untuk membaca alamat MongoDB dari file `.env`
+  - [ ] Buat fungsi tes koneksi (ping database) saat aplikasi backend pertama kali dinyalakan
 
-#### **BE-02: Implementasi API Autentikasi Pengguna (Register & Login)**
+#### **BE-02: Buat API Autentikasi (Register & Login)**
 * **Label**: `Backend` `Feature` `High Priority`
 * **Deskripsi**:
-  Membangun endpoint untuk pendaftaran akun dan verifikasi masuk dengan enkripsi kata sandi yang aman.
-  * **POST /api/register**: Validasi email unik dan enkripsi password menggunakan bcrypt sebelum disimpan.
-  * **POST /api/login**: Cocokkan password terenkripsi dengan input pengguna untuk validasi masuk.
+  Membuat API untuk pendaftaran akun baru (Register) dan masuk log (Login).
+  * **POST /api/register**: Menyimpan user baru dengan password yang sudah di-hash (dienkripsi) menggunakan bcrypt.
+  * **POST /api/login**: Memvalidasi password user untuk masuk aplikasi.
 * **Checklist**:
-  - [ ] Definisikan struct model `User` di `models/user.go`
-  - [ ] Buat fungsi `Register` di `controllers/user_controller.go` (gunakan bcrypt untuk hashing password)
-  - [ ] Buat fungsi `Login` di `controllers/user_controller.go` (verifikasi hash password)
-  - [ ] Hubungkan router group `/api` ke controller Register dan Login di `main.go`
+  - [ ] Buat model data `User` di folder `models/user.go`
+  - [ ] Buat fungsi `Register` di controller (password di-hash dengan bcrypt sebelum disimpan)
+  - [ ] Buat fungsi `Login` di controller (mencocokkan password input dengan database)
+  - [ ] Daftarkan route `/api/register` dan `/api/login` di file `main.go`
 
-#### **BE-03: Implementasi API CRUD Notulensi Rapat**
+#### **BE-03: Buat API Mengelola Rapat (CRUD)**
 * **Label**: `Backend` `Feature` `High Priority`
 * **Deskripsi**:
-  Membangun endpoint untuk memanipulasi data notulensi rapat dengan filter berdasarkan ID pengguna pembuat rapat.
-  * **GET /api/meetings**: Mendapatkan daftar rapat (opsional filter kueri `?userId=`)
-  * **GET /api/meetings/:id**: Mendapatkan detail satu rapat
+  Membuat API untuk membuat, melihat, mengedit, dan menghapus data rapat berdasarkan user yang membuatnya.
+  * **GET /api/meetings**: Mengambil daftar rapat (bisa difilter menggunakan query `?userId=`)
+  * **GET /api/meetings/:id**: Melihat detail satu rapat
   * **POST /api/meetings**: Membuat rapat baru
-  * **PATCH /api/meetings/:id**: Mengubah data rapat secara parsial
-  * **DELETE /api/meetings/:id**: Menghapus rapat dari database
+  * **PATCH /api/meetings/:id**: Mengubah sebagian data rapat
+  * **DELETE /api/meetings/:id**: Menghapus data rapat
 * **Checklist**:
-  - [ ] Definisikan struct model `Meeting` di `models/meeting.go`
-  - [ ] Buat endpoint `GET /meetings` dengan filter `userId` di `controllers/meeting_controller.go`
-  - [ ] Buat endpoint `GET /meetings/:id` dan `POST /meetings`
-  - [ ] Buat endpoint `PATCH /meetings/:id` untuk update dinamis
-  - [ ] Buat endpoint `DELETE /meetings/:id` untuk penghapusan data
-  - [ ] Daftarkan semua endpoint di router `main.go`
+  - [ ] Buat model data `Meeting` di folder `models/meeting.go`
+  - [ ] Buat API untuk mengambil daftar rapat (bisa difilter dengan `userId`)
+  - [ ] Buat API untuk melihat detail rapat dan menambah rapat baru
+  - [ ] Buat API untuk edit rapat (PATCH) dan hapus rapat (DELETE)
+  - [ ] Daftarkan semua route rapat tersebut di file `main.go`
 
-#### **BE-04: Implementasi API Manajemen Profil Pengguna**
+#### **BE-04: Buat API Profil Pengguna**
 * **Label**: `Backend` `Feature` `Medium Priority`
 * **Deskripsi**:
-  Membangun endpoint untuk melihat profil pengguna dan mengubah data pribadi (Nama, Jabatan, Bio, Email, Avatar) agar tersinkronisasi dengan database.
-  * **GET /api/user/:id**: Mendapatkan profil pengguna
-  * **PUT /api/user/:id**: Memperbarui data profil pengguna
+  Membuat API untuk menampilkan profil user dan mengubah data diri (Nama, Jabatan, Bio, Email, Avatar).
+  * **GET /api/user/:id**: Mengambil data profil user
+  * **PUT /api/user/:id**: Mengupdate data profil user di database
 * **Checklist**:
-  - [ ] Buat fungsi `GetUser` di `controllers/user_controller.go`
-  - [ ] Buat fungsi `UpdateUser` di `controllers/user_controller.go` dengan operasi update MongoDB `$set`
-  - [ ] Daftarkan rute `/api/user/:id` di router group `/api` dalam `main.go`
+  - [ ] Buat fungsi ambil user di controller
+  - [ ] Buat fungsi edit user di controller (menggunakan update `$set` MongoDB)
+  - [ ] Daftarkan route `/api/user/:id` di file `main.go`
 
-#### **BE-05: Konfigurasi CORS & Penyajian Static Files Frontend**
+#### **BE-05: Atur CORS & Sajikan File Frontend dari Backend**
 * **Label**: `Backend` `Config` `Medium Priority`
 * **Deskripsi**:
-  Mengaktifkan CORS (Cross-Origin Resource Sharing) agar client/frontend eksternal dapat melakukan request ke API, serta mengonfigurasi router Gin agar dapat menyajikan file statis frontend langsung dari server Go.
+  Mengaktifkan CORS agar frontend eksternal bisa mengakses API, serta mengatur agar backend bisa langsung menampilkan file HTML/CSS/JS frontend (jika menggunakan web statis).
 * **Checklist**:
-  - [ ] Integrasikan middleware `github.com/gin-contrib/cors` dengan konfigurasi default
-  - [ ] Tambahkan konfigurasi penyajian file statis di `main.go` (`r.StaticFile` untuk `/`, `/app.js`, dan `/style.css` yang merujuk ke folder frontend)
-  - [ ] Uji apakah port server (default 8080) dapat melayani request dengan lancar
+  - [ ] Pasang middleware CORS (menggunakan `github.com/gin-contrib/cors`)
+  - [ ] Atur route statis di `main.go` agar server Go bisa melayani file frontend langsung
+  - [ ] Uji coba apakah server backend (port 8080) berjalan lancar saat diakses
 
-#### **BE-06: Pengujian API Manual & Integrasi Endpoint**
+#### **BE-06: Tes Semua API secara Manual**
 * **Label**: `Backend` `Testing` `High Priority`
 * **Deskripsi**:
-  Melakukan verifikasi seluruh API endpoint yang telah dibuat menggunakan POSTMAN, Insomnia, atau Thunder Client untuk memastikan respons JSON dan status HTTP sesuai spesifikasi.
+  Menguji seluruh API yang telah dibuat menggunakan Postman, Insomnia, atau Thunder Client untuk memastikan respon data dan status kode HTTP sudah benar.
 * **Checklist**:
-  - [ ] Uji skenario registrasi dengan input valid dan input email duplikat
-  - [ ] Uji skenario login dengan password benar dan salah (pastikan JSON response membawa data pengguna secara lengkap tanpa menampilkan password)
-  - [ ] Uji CRUD Rapat: input data baru, update data, dan hapus data (pastikan perubahan langsung tercermin di database MongoDB)
-  - [ ] Pastikan respons error (status 400/401/404/500) mengembalikan pesan JSON yang deskriptif
+  - [ ] Uji register user baru dan tes jika email kembar (harus error)
+  - [ ] Uji login dengan password yang benar dan salah (pastikan data password asli tidak ikut dikirim di respon JSON)
+  - [ ] Uji tambah, edit, dan hapus rapat, lalu pastikan datanya langsung berubah di MongoDB
+  - [ ] Pastikan jika terjadi error, API mengembalikan pesan error yang jelas dalam format JSON
 
 ---
 
 ### 🎨 FRONTEND DEVELOPER
 
-#### **FE-01: Implementasi Tema Utama, Styling, dan Responsivitas UI**
+#### **FE-01: Desain Tampilan Utama (Tema Maroon & Responsif)**
 * **Label**: `Frontend` `UI-UX` `High Priority`
 * **Deskripsi**:
-  Membangun pondasi tampilan aplikasi dengan skema warna Maroon modern (atau tema premium yang disepakati), menetapkan tipografi modern, serta membuat layout yang responsif untuk tampilan desktop dan mobile.
+  Membuat desain dasar aplikasi dengan warna Maroon modern, font yang bagus, dan tampilan yang rapi saat dibuka di HP maupun laptop.
 * **Checklist**:
-  * **Jika Web Statis**:
-    - [ ] Buat struktur HTML utama di `fe/index.html` (Header, Sidebar, Area Content, Modals)
-    - [ ] Buat desain CSS di `fe/style.css` dengan variabel warna, efek glassmorphism, dan hover transition
-    - [ ] Pastikan layout responsif menggunakan Grid/Flexbox
+  * **Jika Web Statis (HTML/CSS)**:
+    - [ ] Buat kerangka HTML utama (`fe/index.html`): Header, Sidebar, Area Konten, dan Modal Popup
+    - [ ] Desain CSS (`fe/style.css`): atur warna maroon, efek blur (glassmorphism), dan transisi tombol yang halus
+    - [ ] Pastikan tampilan rapi di layar HP (responsif menggunakan Flexbox/Grid)
   * **Jika Flutter (Mobile)**:
-    - [ ] Atur tema warna aplikasi di `app_theme.dart` (menggunakan warna maroon)
-    - [ ] Desain custom widget tombol, input textfield dengan border bulat, dan kartu informasi
+    - [ ] Atur tema warna maroon di file `app_theme.dart`
+    - [ ] Buat komponen (widget) custom untuk tombol, input text, dan kartu informasi
 
-#### **FE-02: Pembuatan Halaman Autentikasi & Manajemen Sesi Lokal (Session)**
+#### **FE-02: Buat Halaman Login/Register & Simpan Sesi Login**
 * **Label**: `Frontend` `Feature` `High Priority`
 * **Deskripsi**:
-  Membangun tampilan form Login dan Register, menangani submit data ke API backend, serta menyimpan data sesi ke penyimpanan lokal browser / perangkat.
+  Membuat formulir Login & Register, menghubungkannya ke API backend, serta menyimpan data login agar user tidak perlu login ulang saat membuka aplikasi.
 * **Checklist**:
-  - [ ] Buat tampilan UI Form Login dan Register (dengan validasi kolom kosong)
-  - [ ] Implementasikan fungsi pengiriman data ke backend `/api/login` dan `/api/register`
-  - [ ] Simpan data user ke `localStorage` (untuk Web, dengan key `rapatin_user`) atau Secure Storage (untuk Flutter) setelah login berhasil
-  - [ ] Buat fungsi auto-login (cek session di lokal penyimpanan saat aplikasi pertama kali dibuka)
-  - [ ] Buat fungsi Logout untuk menghapus data sesi dan mengarahkan kembali pengguna ke halaman login
+  - [ ] Buat tampilan halaman Login dan Register
+  - [ ] Hubungkan form ke API `/api/login` dan `/api/register`
+  - [ ] Simpan data user ke `localStorage` (untuk Web) atau Secure Storage (untuk Flutter) setelah login berhasil
+  - [ ] Buat fitur cek sesi login otomatis saat aplikasi pertama kali dibuka (auto-login)
+  - [ ] Buat tombol Logout untuk menghapus data sesi dan kembali ke halaman Login
 
-#### **FE-03: Pembuatan Dashboard & Tampilan Daftar Rapat dengan Fitur Pencarian**
+#### **FE-03: Buat Dashboard & Daftar Rapat dengan Kolom Pencarian**
 * **Label**: `Frontend` `Feature` `High Priority`
 * **Deskripsi**:
-  Membangun halaman utama (Dashboard/Home) yang memuat daftar rapat yang telah dibuat oleh pengguna bersangkutan dan menyediakan input pencarian dinamis (real-time search).
+  Membuat halaman utama (Dashboard) untuk menampilkan daftar rapat milik user dan menambahkan kolom pencarian langsung (real-time).
 * **Checklist**:
-  - [ ] Ambil data rapat dari `/api/meetings?userId={id}` saat dashboard dimuat
-  - [ ] Tampilkan ringkasan rapat dalam format kartu rapat (`MeetingCard`) secara berurutan
-  - [ ] Tampilkan maksimal 4 rapat terbaru di halaman Beranda/Home dan seluruh rapat di tab/halaman Rapat
-  - [ ] Implementasikan kolom pencarian di bagian atas untuk memfilter daftar rapat berdasarkan judul atau lokasi rapat secara real-time
-  - [ ] Tampilkan status loading (`CircularProgressIndicator` / Skeleton loader) saat data sedang dimuat
+  - [ ] Panggil API `/api/meetings?userId={id}` untuk mengambil data rapat saat dashboard dibuka
+  - [ ] Tampilkan daftar rapat menggunakan kartu desain (card) secara berurutan
+  - [ ] Tampilkan maksimal 4 rapat terbaru di halaman Beranda, dan tampilkan semua rapat di halaman/tab Rapat
+  - [ ] Buat kolom pencarian di bagian atas untuk menyaring rapat berdasarkan judul atau lokasi
+  - [ ] Tampilkan animasi loading (loading spinner atau skeleton card) saat data sedang dimuat
 
-#### **FE-04: Pembuatan Form Modal Tambah, Edit, dan Hapus Rapat**
+#### **FE-04: Buat Form Modal (Tambah, Edit, Hapus Rapat)**
 * **Label**: `Frontend` `Feature` `High Priority`
 * **Deskripsi**:
-  Membuat formulir interaktif (dalam bentuk Modal Popup atau Halaman Form baru) untuk menambah, mengubah, dan menghapus catatan rapat.
+  Membuat modal popup atau formulir untuk menambah, mengedit, dan menghapus data rapat.
 * **Checklist**:
-  - [ ] Buat form input untuk Judul, Tanggal (menggunakan date picker), Waktu, Lokasi, dan Deskripsi Rapat
-  - [ ] Hubungkan tombol **Buat Rapat** / **Simpan** untuk mengirimkan data ke endpoint `POST /api/meetings`
-  - [ ] Buat form edit yang terisi otomatis dengan data rapat sebelumnya dan kirim pembaruan ke `PATCH /api/meetings/:id`
-  - [ ] Tambahkan dialog konfirmasi konseptual sebelum pengguna menghapus rapat (`DELETE /api/meetings/:id`)
-  - [ ] Pastikan daftar rapat di UI ter-update secara instan tanpa perlu refresh browser / memuat ulang paksa halaman
+  - [ ] Buat form input: Judul, Tanggal (menggunakan kalender/date picker), Waktu, Lokasi, dan Deskripsi
+  - [ ] Hubungkan tombol simpan ke API tambah rapat (`POST /api/meetings`)
+  - [ ] Buat form edit yang otomatis terisi data rapat lama dan hubungkan ke API edit (`PATCH /api/meetings/:id`)
+  - [ ] Buat kotak konfirmasi (dialog) sebelum user menghapus rapat (`DELETE /api/meetings/:id`)
+  - [ ] Pastikan daftar rapat langsung ter-update di layar setelah ditambah/diedit/dihapus (tanpa perlu reload browser manual)
 
-#### **FE-05: Integrasi Halaman Profil Pengguna & Avatar Dinamis (UI-Avatars API)**
+#### **FE-05: Buat Halaman Profil & Foto Profil Otomatis (UI-Avatars)**
 * **Label**: `Frontend` `Feature` `Medium Priority`
 * **Deskripsi**:
-  Membangun tampilan halaman profil yang menampilkan data detail pengguna, total statistik rapat yang telah dibuat, form untuk mengubah profil, dan mengintegrasikan pembuatan avatar inisial otomatis.
+  Membuat halaman profil yang menampilkan data diri user, jumlah rapat yang sudah dibuat, form edit profil, dan foto profil inisial otomatis.
 * **Checklist**:
-  - [ ] Tampilkan detail Nama, Email, Jabatan, dan Bio Pengguna
-  - [ ] Buat form edit profil untuk memperbarui data ke API backend `PUT /api/user/:id`
-  - [ ] Integrasikan URL dynamic avatar dari `ui-avatars.com` berdasarkan nama lengkap pengguna (misal: `https://ui-avatars.com/api/?name=Budi+Santoso`)
-  - [ ] Hitung secara dinamis total rapat yang telah dibuat oleh pengguna untuk ditampilkan di bagian statistik profil
+  - [ ] Tampilkan detail Nama, Email, Jabatan, dan Bio user
+  - [ ] Buat form edit profil untuk menyimpan perubahan ke API `/api/user/:id`
+  - [ ] Hubungkan foto profil dengan API `ui-avatars.com` berdasarkan nama user (misal: `https://ui-avatars.com/api/?name=Budi+Santoso`)
+  - [ ] Hitung total rapat milik user dan tampilkan sebagai angka statistik di profil
 
-#### **FE-06: Integrasi API Backend ke UI & Penanganan Status Error (Toast)**
+#### **FE-06: Hubungkan UI Frontend dengan API Backend & Atur Notifikasi (Toast)**
 * **Label**: `Frontend` `Integration` `High Priority`
 * **Deskripsi**:
-  Menghubungkan frontend secara penuh dengan backend, mengatur penanganan error API (misalnya email sudah terdaftar, login gagal, server down), dan menampilkan notifikasi toast (feedback) yang menarik ke pengguna.
+  Menghubungkan frontend ke backend secara penuh, menangani pesan kesalahan dari server, dan memunculkan notifikasi pop-up (toast) yang menarik.
 * **Checklist**:
-  - [ ] Pastikan endpoint server API (URL dan Port) diarahkan dengan benar via konfigurasi global (base URL)
-  - [ ] Tampilkan notifikasi toast sukses/gagal yang menarik untuk setiap aksi (Register, Login, CRUD Rapat, Edit Profil)
-  - [ ] Handle error request (tampilkan pesan kesalahan yang dikirimkan oleh backend JSON, misal: `"Invalid email or password"`)
-  - [ ] Lakukan uji coba skenario end-to-end (E2E) dari pendaftaran akun hingga penghapusan rapat untuk memvalidasi kelancaran integrasi
+  - [ ] Atur alamat base URL API backend agar terpusat di satu file konfigurasi
+  - [ ] Tampilkan notifikasi pop-up (toast) sukses/gagal untuk setiap aksi (login, register, tambah/edit/hapus rapat, edit profil)
+  - [ ] Tangani error dari API (misal tampilkan pesan "Email sudah terdaftar" atau "Password salah") agar mudah dibaca user
+  - [ ] Lakukan uji coba alur aplikasi dari awal (daftar akun) sampai akhir (hapus rapat) untuk memastikan semua berjalan lancar
