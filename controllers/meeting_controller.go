@@ -135,8 +135,14 @@ func UpdateMeeting(c *gin.Context) {
 		return
 	}
 
-	input.ID = id
-	c.JSON(http.StatusOK, gin.H{"data": input})
+	var updatedMeeting models.Meeting
+	err = collection.FindOne(ctx, bson.M{"_id": id}).Decode(&updatedMeeting)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch updated meeting: " + err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": updatedMeeting})
 }
 
 // DELETE /meetings/:id

@@ -146,5 +146,12 @@ func UpdateUser(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"data": "User updated successfully"})
+	var updatedUser models.User
+	err = collection.FindOne(ctx, bson.M{"_id": id}).Decode(&updatedUser)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch updated user: " + err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": updatedUser})
 }
