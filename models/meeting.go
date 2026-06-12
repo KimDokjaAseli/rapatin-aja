@@ -10,4 +10,5 @@ type Meeting struct {
 	Location    string             `bson:"location" json:"location"`
 	Description string             `bson:"description" json:"description"`
 	UserID      primitive.ObjectID `bson:"userId,omitempty" json:"userId,omitempty"`
+	Tags        []string           `bson:"tags,omitempty" json:"tags"`
 }

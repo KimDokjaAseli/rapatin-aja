@@ -13,7 +13,10 @@ func main() {
 	r := gin.Default()
 
 	// CORS configuration
-	r.Use(cors.Default())
+	configCors := cors.DefaultConfig()
+	configCors.AllowAllOrigins = true
+	configCors.AllowHeaders = []string{"Origin", "Content-Length", "Content-Type", "Authorization", "X-Admin-ID"}
+	r.Use(cors.New(configCors))
 
 	// Connect to database
 	config.ConnectDatabase()
@@ -35,6 +38,13 @@ func main() {
 		// User
 		api.GET("/user/:id", controllers.GetUser)
 		api.PUT("/user/:id", controllers.UpdateUser)
+
+		// Admin
+		api.GET("/admin/stats", controllers.GetAdminStats)
+		api.GET("/admin/users", controllers.AdminGetAllUsers)
+		api.PUT("/admin/users/:id/role", controllers.AdminUpdateUserRole)
+		api.GET("/admin/meetings", controllers.AdminGetAllMeetings)
+		api.DELETE("/admin/meetings/:id", controllers.AdminDeleteMeeting)
 	}
 
 	// Serve Frontend Static Files

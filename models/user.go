@@ -10,4 +10,5 @@ type User struct {
 	Position         string             `bson:"position" json:"position"`
 	Bio              string             `bson:"bio" json:"bio"`
 	ProfileImagePath string             `bson:"profileImagePath" json:"profileImagePath"`
+	Role             string             `bson:"role" json:"role"`
 }

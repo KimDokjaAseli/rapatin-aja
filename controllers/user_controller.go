@@ -47,6 +47,7 @@ func Register(c *gin.Context) {
 		Name:     input.Name,
 		Position: "Member",
 		Bio:      "Welcome to RapatIn!",
+		Role:     "user",
 	}
 
 	_, err = collection.InsertOne(ctx, newUser)
@@ -154,4 +155,181 @@ func UpdateUser(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": updatedUser})
+}
+
+// Check if user is admin helper
+func isAdmin(adminIDStr string) bool {
+	if adminIDStr == "" {
+		return false
+	}
+	id, err := primitive.ObjectIDFromHex(adminIDStr)
+	if err != nil {
+		return false
+	}
+	collection := config.GetCollection("users")
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	var user models.User
+	err = collection.FindOne(ctx, bson.M{"_id": id}).Decode(&user)
+	if err != nil {
+		return false
+	}
+	return user.Role == "admin"
+}
+
+// GET /api/admin/stats
+func GetAdminStats(c *gin.Context) {
+	adminID := c.GetHeader("X-Admin-ID")
+	if !isAdmin(adminID) {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized. Admin access required."})
+		return
+	}
+
+	usersCol := config.GetCollection("users")
+	meetingsCol := config.GetCollection("meetings")
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	totalUsers, err := usersCol.CountDocuments(ctx, bson.M{})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	totalMeetings, err := meetingsCol.CountDocuments(ctx, bson.M{})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": gin.H{
+		"totalUsers":    totalUsers,
+		"totalMeetings": totalMeetings,
+	}})
+}
+
+// GET /api/admin/users
+func AdminGetAllUsers(c *gin.Context) {
+	adminID := c.GetHeader("X-Admin-ID")
+	if !isAdmin(adminID) {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized. Admin access required."})
+		return
+	}
+
+	collection := config.GetCollection("users")
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	cursor, err := collection.Find(ctx, bson.M{})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	defer cursor.Close(ctx)
+
+	users := []models.User{}
+	for cursor.Next(ctx) {
+		var user models.User
+		cursor.Decode(&user)
+		users = append(users, user)
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": users})
+}
+
+// PUT /api/admin/users/:id/role
+func AdminUpdateUserRole(c *gin.Context) {
+	adminID := c.GetHeader("X-Admin-ID")
+	if !isAdmin(adminID) {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized. Admin access required."})
+		return
+	}
+
+	targetID, err := primitive.ObjectIDFromHex(c.Param("id"))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid user ID"})
+		return
+	}
+
+	var input struct {
+		Role string `json:"role" binding:"required"`
+	}
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if input.Role != "user" && input.Role != "admin" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid role value"})
+		return
+	}
+
+	collection := config.GetCollection("users")
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	_, err = collection.UpdateOne(ctx, bson.M{"_id": targetID}, bson.M{"$set": bson.M{"role": input.Role}})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "User role updated successfully"})
+}
+
+// GET /api/admin/meetings
+func AdminGetAllMeetings(c *gin.Context) {
+	adminID := c.GetHeader("X-Admin-ID")
+	if !isAdmin(adminID) {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized. Admin access required."})
+		return
+	}
+
+	collection := config.GetCollection("meetings")
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	cursor, err := collection.Find(ctx, bson.M{})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	defer cursor.Close(ctx)
+
+	meetings := []models.Meeting{}
+	for cursor.Next(ctx) {
+		var meeting models.Meeting
+		cursor.Decode(&meeting)
+		meetings = append(meetings, meeting)
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": meetings})
+}
+
+// DELETE /api/admin/meetings/:id
+func AdminDeleteMeeting(c *gin.Context) {
+	adminID := c.GetHeader("X-Admin-ID")
+	if !isAdmin(adminID) {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized. Admin access required."})
+		return
+	}
+
+	meetingID, err := primitive.ObjectIDFromHex(c.Param("id"))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid meeting ID format"})
+		return
+	}
+
+	collection := config.GetCollection("meetings")
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	_, err = collection.DeleteOne(ctx, bson.M{"_id": meetingID})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Meeting deleted successfully"})
 }

@@ -126,6 +126,9 @@ func UpdateMeeting(c *gin.Context) {
 	if input.Description != "" {
 		updateData["description"] = input.Description
 	}
+	if input.Tags != nil {
+		updateData["tags"] = input.Tags
+	}
 
 	update := bson.M{"$set": updateData}
 
